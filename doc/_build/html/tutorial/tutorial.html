@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; dgm1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="dgm1  documentation" href="../index.html"/>
+        <link rel="next" title="dgm1" href="../modules/modules.html"/>
+        <link rel="prev" title="Welcome to dgm1’s documentation!" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> dgm1
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#at-a-glance">At a glance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instance">Instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download">Download</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-raster-intersecting-a-region">Download raster intersecting a region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-all">Download all</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shapefile">Shapefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resample">Resample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vrt-file">VRT file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mosaic">Mosaic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/modules.html">dgm1</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dgm1</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorial/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>dgm1 requires numpy and gdal.</p>
+<div class="section" id="using-pip">
+<h3>Using pip<a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">dgm1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-conda">
+<h3>Using conda<a class="headerlink" href="#using-conda" title="Permalink to this headline">¶</a></h3>
+<p>evapotranspiration is not available in conda, but we recommend to install numpy and gdal with conda before installing
+evapotranspiration with pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">numpy</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">gdal</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">evapotranspiration</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dgm1</span></code> is a package to download and process digital elevation model (dem) data provided by the Government of the
+State Nord Rhine-Westphalia in Germany. DGM1 is the German acronym for <cite>Digitales Geländemodel</cite> with one meter
+resolution.</p>
+<a class="reference internal image-reference" href="../_images/dgm1_server.png"><img alt="../_images/dgm1_server.png" class="align-center" src="../_images/dgm1_server.png" style="width: 90%;" /></a>
+<p>Each <cite>xyz.gz</cite> file in <a class="reference external" href="https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1/dgm1_xyz/">https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1/dgm1_xyz/</a> contains a list of
+4,000,000 tuples (x, y, z) corresponding to a raster of 2000x2000 pixels. The compound coordinate reference system
+is <cite>EPSG 25832</cite> for the horizontal component and <cite>EPSG 7837</cite> for the vertical component.</p>
+</div>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>download</p></li>
+<li><p>transform into TIF files</p></li>
+<li><p>resample</p></li>
+<li><p>create VRT files (GDAL Virtual Format)</p></li>
+<li><p>mosaic and clip</p></li>
+</ul>
+</div>
+<div class="section" id="at-a-glance">
+<h2>At a glance<a class="headerlink" href="#at-a-glance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="kn">import</span> <span class="n">DGM1NRW</span>
+
+<span class="c1"># create an instance of the class DGM1NRW</span>
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a shapefile with polygons (2x2 km²) representing dem-tiles</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_shapefile</span><span class="p">()</span>
+
+<span class="c1"># download all XYZ files intersecting with the region and save them as TIF files</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+
+<span class="c1"># resample the original 1 meter raster to 2, 5, and 10 meters</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># compose the TIF files into a GDAL Virtual Format for different resolutions</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_01m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_02m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_05m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_10m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># mosaic TIF files intersecting the region</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_01m.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_02m.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_05m.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_10m.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/area.png"><img alt="../_images/area.png" src="../_images/area.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="../_images/dgm1.png"><img alt="../_images/dgm1.png" src="../_images/dgm1.png" style="width: 32%;" /></a>
+</div>
+<div class="section" id="instance">
+<h2>Instance<a class="headerlink" href="#instance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="k">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="n">dgm1_dir</span><span class="o">=</span><span class="s1">&#39;D:/dgm1&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The class <code class="docutils literal notranslate"><span class="pre">DGM1NRW</span></code> has one mandatory (dgm1_dir) and one optional (shp_region) parameter:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dgm1_dir</span></code> is the directory of downloaded and processed rasters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shp_region</span></code> is an optional shapefile of the region of interest. If given, downloading and processing applies to this region only, otherwise to the whole State NRW (ca. 9000 files).</p></li>
+</ul>
+</div>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">DGM1NRW.download()</span></code> downloads and unzip server files, transform them from XYZ into TIF format and
+save them locally in the folder <cite>dgm1_nrw_01m_tif</cite>. If <code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code> is not defined, all ca. 9000 files will be
+download, requiring many hours and ca. 50 GB disk. Otherwise, it downloads DEM files intersecting <cite>shp_region.shp</cite> only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">n_cores</span></code> is an optional parameter to allow parallel downloading and processing. If a computer has n cores,
+<span class="math notranslate nohighlight">\(1 \leq n\_cores \leq n - 1\)</span>. In the example below, the intentionally high <span class="math notranslate nohighlight">\(n\_cores = 40\)</span> will be reduced
+to n_cores = 11 if the computer has <span class="math notranslate nohighlight">\(n = 12\)</span> cores. Any high number of cores can be given in order
+to use <span class="math notranslate nohighlight">\(n - 1\)</span> cores. If you want to know the number of cores of your computer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of April 2020 three out of ca. 90000 raster files were inconsistent:</p>
+<ul class="simple">
+<li><p>dgm1_32426_5624_2_nw.xyz.gz</p></li>
+<li><p>dgm1_32456_5776_2_nw.xyz.gz</p></li>
+<li><p>dgm1_32442_5770_2_nw.xyz.gz</p></li>
+</ul>
+</div>
+<p>Downloading inconsistent files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="mi">3</span> <span class="n">files</span> <span class="kn">from</span> <span class="nn">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">opengeodata</span><span class="o">.</span><span class="n">nrw</span><span class="o">.</span><span class="n">de</span><span class="o">/</span><span class="n">produkte</span><span class="o">/</span><span class="n">geobasis</span><span class="o">/</span><span class="n">hm</span><span class="o">/</span><span class="n">dgm1_xyz</span><span class="o">/</span><span class="n">dgm1_xyz</span><span class="o">/</span> <span class="n">using</span> <span class="mi">3</span> <span class="n">cores</span>
+<span class="n">Filename</span><span class="p">:</span> <span class="n">dgm1_32456_5776_2_nw</span><span class="o">.</span><span class="n">xyz</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6000</span><span class="p">,):</span> <span class="n">cannot</span> <span class="n">reshape</span> <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">6000</span> <span class="n">into</span> <span class="n">shape</span> <span class="p">(</span><span class="mi">4000000</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Filename</span><span class="p">:</span> <span class="n">dgm1_32442_5770_2_nw</span><span class="o">.</span><span class="n">xyz</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6000</span><span class="p">,):</span> <span class="n">cannot</span> <span class="n">reshape</span> <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">6000</span> <span class="n">into</span> <span class="n">shape</span> <span class="p">(</span><span class="mi">4000000</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Filename</span><span class="p">:</span> <span class="n">dgm1_32426_5624_2_nw</span><span class="o">.</span><span class="n">xyz</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11999988</span><span class="p">,):</span> <span class="n">cannot</span> <span class="n">reshape</span> <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">11999988</span> <span class="n">into</span> <span class="n">shape</span> <span class="p">(</span><span class="mi">4000000</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span> <span class="n">files</span> <span class="n">downloaded</span> <span class="ow">in</span> <span class="mf">6.35</span> <span class="n">seconds</span>
+</pre></div>
+</div>
+<div class="section" id="download-raster-intersecting-a-region">
+<h3>Download raster intersecting a region<a class="headerlink" href="#download-raster-intersecting-a-region" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="k">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>  <span class="c1"># n_cores = 1</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/dgm1_download.png"><img alt="../_images/dgm1_download.png" src="../_images/dgm1_download.png" style="width: 30%;" /></a>
+</div>
+<div class="section" id="download-all">
+<h3>Download all<a class="headerlink" href="#download-all" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="k">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">n_cores</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="shapefile">
+<h2>Shapefile<a class="headerlink" href="#shapefile" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">create_shapefile()</span></code> creates the shapefile <code class="docutils literal notranslate"><span class="pre">gis/dgm1_2_nw.shp</span></code> in the directory <code class="docutils literal notranslate"><span class="pre">dgm1_dir</span></code>. The shapefile
+contains square corresponding to the DEM files found in
+<a class="reference external" href="https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_xyz/dgm1_xyz/">https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_xyz/dgm1_xyz/</a>. It squares from all files found on the server.
+The shapefile has an attribute <code class="docutils literal notranslate"><span class="pre">Filename</span></code> with the raster file name (see Figures below).</p>
+<a class="reference internal image-reference" href="../_images/tiles_shp.png"><img alt="../_images/tiles_shp.png" src="../_images/tiles_shp.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/tiles_filenames.png"><img alt="../_images/tiles_filenames.png" src="../_images/tiles_filenames.png" style="width: 30%;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="k">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="n">dgm1_dir</span><span class="o">=</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_shapefile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resample">
+<h2>Resample<a class="headerlink" href="#resample" title="Permalink to this headline">¶</a></h2>
+<p>Each downloaded TIF file can be resample to a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80, 100, 125,
+200, 250, 400, 500, 1000, 2000).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="k">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># rasters with 1000x1000 pixels</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">pixel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># rasters with 400x400 pixels</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">pixel_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># rasters with 200x200 pixels</span>
+</pre></div>
+</div>
+<p>The class attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">DGM1NRW.compress_options</span></code> = [‘COMPRESS=LZW’, ‘PREDICTOR=2’] can be modified before
+downloading:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>from dgm.dgm1 import DGM1NRW
+
+dgm1 = DGM1NRW(&#39;~/dgm1&#39;)
+dgm1.compress_options` = [&#39;COMPRESS=LZMA&#39;]
+dgm1.download(11)
+</pre></div>
+</div>
+</div>
+<div class="section" id="vrt-file">
+<h2>VRT file<a class="headerlink" href="#vrt-file" title="Permalink to this headline">¶</a></h2>
+<p>The GDAL Virtual format creates a kind of mosaic file composed of tiles saved individually and listed in an XML
+file. Together with the (.vrt) there is a folder with the same name (without the suffix .vrt) containing the
+corresponding TIF files. It is very useful to create large rasters, which can not be created or processed otherwise due
+to computer limitations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="kn">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_01m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/dgm1_vrt.png"><img alt="../_images/dgm1_vrt.png" src="../_images/dgm1_vrt.png" style="width: 30%;" /></a>
+</div>
+<div class="section" id="mosaic">
+<h2>Mosaic<a class="headerlink" href="#mosaic" title="Permalink to this headline">¶</a></h2>
+<p>Mosaic will create one raster file (default TIF file) from rasters intersecting the region. There are three types of
+output raster extent:</p>
+<ul class="simple">
+<li><p>clipped to <code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></p></li>
+<li><p>envelope of <code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></p></li>
+<li><p>envelope of rasters intersecting <code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgm.dgm1</span> <span class="kn">import</span> <span class="n">DGM1NRW</span>
+
+<span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/example/area.shp&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_02m_clip.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;clip&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_02m_region.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;region&#39;</span><span class="p">)</span>
+<span class="n">dgm1</span><span class="o">.</span><span class="n">mosaic</span><span class="p">(</span><span class="s1">&#39;~/example/dgm1_area_02m_rasters.tif&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;rasters&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/mosaic_clip.png"><img alt="../_images/mosaic_clip.png" src="../_images/mosaic_clip.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="../_images/mosaic_region.png"><img alt="../_images/mosaic_region.png" src="../_images/mosaic_region.png" style="width: 30%;" /></a>
+<a class="reference internal image-reference" href="../_images/mosaic_rasters.png"><img alt="../_images/mosaic_rasters.png" src="../_images/mosaic_rasters.png" style="width: 30%;" /></a>
+<p>Be aware that your computer may not support the creation of very large files due to RAM size limitations. If the region
+is large, the resolution (<cite>pixel_size</cite>) must increase to cope the RAM availability.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to memory limitations your computer may <cite>freeze</cite> if you mosaic a very large file at a low resolution!!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modules/modules.html" class="btn btn-neutral float-right" title="dgm1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to dgm1’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jackson Roehrig.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

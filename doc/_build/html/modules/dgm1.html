@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dgm1 package &mdash; dgm1  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="dgm1  documentation" href="../index.html"/>
+        <link rel="up" title="dgm1" href="modules.html"/>
+        <link rel="prev" title="dgm1" href="modules.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> dgm1
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">dgm1</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dgm1 package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dgm1.dgm1_nrw">dgm1.dgm1_nrw module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dgm1">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">dgm1</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">dgm1</a> &raquo;</li>
+        
+      <li>dgm1 package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/modules/dgm1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dgm1-package">
+<h1>dgm1 package<a class="headerlink" href="#dgm1-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dgm1.dgm1_nrw">
+<span id="dgm1-dgm1-nrw-module"></span><h2>dgm1.dgm1_nrw module<a class="headerlink" href="#module-dgm1.dgm1_nrw" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dgm1.dgm1_nrw.DGM1NRW">
+<em class="property">class </em><code class="sig-prename descclassname">dgm1.dgm1_nrw.</code><code class="sig-name descname">DGM1NRW</code><span class="sig-paren">(</span><em class="sig-param">dgm1_dir</em>, <em class="sig-param">shp_region=None</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class DGM1NRW downloads and processes dem rasters found in
+<cite>https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_xyz/dgm1_xyz/</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dgm1_dir</strong> (<em>str</em>) – directory to save downloaded 1 meter rasters as well as its shapefile and resampled rasters.</p></li>
+<li><p><strong>shp_region</strong> (<em>str</em>) – shapefile with the region of interest. If defined, all processes refer to this shapefile.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.nodata">
+<code class="sig-name descname">nodata</code><em class="property"> = -9999.0</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.nodata" title="Permalink to this definition">¶</a></dt>
+<dd><p>nodata for the created rasters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz">
+<code class="sig-name descname">url_dgm1_xyz</code><em class="property"> = 'https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_xyz/dgm1_xyz/'</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of dem rasters with one meter resolution and 2000x2000 <span class="math notranslate nohighlight">\(m^2\)</span> size.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.compress_options">
+<code class="sig-name descname">compress_options</code><em class="property"> = ['COMPRESS=LZW', 'PREDICTOR=2']</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.compress_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compress options used in gdal driver.Create().</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.creation_options">
+<code class="sig-name descname">creation_options</code><em class="property"> = ['BIGTIFF=YES', 'COMPRESS=LZW', 'ZSTD_LEVEL=1', 'TILED=YES', 'PREDICTOR=2']</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.creation_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.shp_region">
+<code class="sig-name descname">shp_region</code><em class="property"> = None</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapefile with the region of interest. If defined, all processes refer to this shapefile. Otherwise all 
+rasters are downloaded and processed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.dgm1_dir">
+<code class="sig-name descname">dgm1_dir</code><em class="property"> = None</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.dgm1_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory to save the original 1 meter products as well as its shapefile and resampled rasters.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles">
+<code class="sig-name descname">shp_filename_tiles</code><em class="property"> = None</em><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shapefile <cite>dgm1_2_nw.shp</cite> contaning all tiles found on the server as 2x2 <span class="math notranslate nohighlight">\(km^2\)</span> squares. It is saved 
+in <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.dgm1_dir" title="dgm1.dgm1_nrw.DGM1NRW.dgm1_dir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dgm1_dir</span></code></a>/gis.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.tif_dir">
+<code class="sig-name descname">tif_dir</code><span class="sig-paren">(</span><em class="sig-param">pixel_size</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.tif_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the directory name of rasters with the given pixel_size. pixel_size = 1 corresponds to the
+downloaded rasters with 1 meter resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(str) full path of the directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.vrt_filename">
+<em class="property">static </em><code class="sig-name descname">vrt_filename</code><span class="sig-paren">(</span><em class="sig-param">pixel_size</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.vrt_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the basename of the vrt-file for the given pixel size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(str) basename of the vrt-file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.tif_filenames">
+<code class="sig-name descname">tif_filenames</code><span class="sig-paren">(</span><em class="sig-param">pixel_size</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.tif_filenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the names of the downloaded files with the given pixel files in tif-format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(list) full path file names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.srs">
+<em class="property">static </em><code class="sig-name descname">srs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.srs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the compound coordinate reference system using <cite>EPSG 25832</cite> for the horizontal component and
+<cite>EPSG 7837</cite> for the vertical component. The compound srs is labeled as
+<code class="docutils literal notranslate"><span class="pre">ETRS89</span> <span class="pre">/</span> <span class="pre">UTM</span> <span class="pre">zone</span> <span class="pre">32N</span> <span class="pre">+</span> <span class="pre">DHHN2016</span> <span class="pre">height</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(osr.SpatialReference) spatial reference system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region">
+<code class="sig-name descname">gz_filenames_intersecting_region</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
+intersect the region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined or it is outside the
+domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list) list of files with the suffix <cite>xyz.gz</cite></p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/study_area/region.shp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">gz_filenames_intersecting_region</span><span class="p">()</span>
+<span class="go">[&#39;dgm1_32350_5672_2_nw.xyz.gz&#39;, &#39;dgm1_32350_5674_2_nw.xyz.gz&#39;, ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region_envelope">
+<code class="sig-name descname">gz_filenames_intersecting_region_envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
+intersect the envelopen of the region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined
+or the envelope is outside the domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list) list of files with the suffix <cite>xyz.gz</cite></p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/study_area/region.shp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">gz_filenames_intersecting_region</span><span class="p">()</span>
+<span class="go">[&#39;dgm1_32350_5672_2_nw.xyz.gz&#39;, &#39;dgm1_32350_5674_2_nw.xyz.gz&#39;, ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.create_shapefile">
+<code class="sig-name descname">create_shapefile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.create_shapefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a shapefile with squares of 2x2 km² using raster file names from <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz" title="dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz"><code class="xref py py-attr docutils literal notranslate"><span class="pre">url_dgm1_xyz</span></code></a>.
+The shapefile <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a> is saved in <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.dgm1_dir" title="dgm1.dgm1_nrw.DGM1NRW.dgm1_dir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dgm1_dir</span></code></a>. The shapefile attribute <cite>Filename</cite>
+indicates the gz-file name found on the server. The spatial coordinate system is defined in
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">create_spatial_reference()</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.download">
+<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param">n_cores=1</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download rasters from <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz" title="dgm1.dgm1_nrw.DGM1NRW.url_dgm1_xyz"><code class="xref py py-attr docutils literal notranslate"><span class="pre">url_dgm1_xyz</span></code></a> intersecting <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Download all rasters if
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">region</span></code> is not defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n_cores</strong> – number of cores for parallel downloading and transformation into tif-files. n_core is limited
+to <span class="math notranslate nohighlight">\(n\_cores \leq n - 1\)</span>, where n ist the total number of cores found on the computer. n_cores can
+be intentionally be high in order to use <span class="math notranslate nohighlight">\(n - 1\)</span> cores.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.resample">
+<code class="sig-name descname">resample</code><span class="sig-paren">(</span><em class="sig-param">pixel_size</em>, <em class="sig-param">force=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resample dowloaded TIF files with 1 meter resolution into TIF files with a resolution of pixel_size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – if True, resample also existing files, otherwise skip them. Default force=False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.region_envelope">
+<code class="sig-name descname">region_envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.region_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return [x_min, y_min, x_max, y_max] for <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list) envelope of <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.create_vrt">
+<code class="sig-name descname">create_vrt</code><span class="sig-paren">(</span><em class="sig-param">vrt_filename</em>, <em class="sig-param">pixel_size=1</em>, <em class="sig-param">n_cores=1</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.create_vrt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a raster named <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.vrt_filename" title="dgm1.dgm1_nrw.DGM1NRW.vrt_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vrt_filename</span></code></a> in vrt-format. A folder without the suffix <cite>.vrt</cite> will be created
+together with the and populated with rasters of the given <code class="xref py py-attr docutils literal notranslate"><span class="pre">pixel_size</span></code> intersecting with the region.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/study_area/region.shp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">create_vrt</span><span class="p">(</span><span class="s1">&#39;~/study_area/dgm1/dgm1_region_02m.vrt&#39;</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vrt_filename</strong> (<em>str</em>) – full path vrt file name (.vrt)</p></li>
+<li><p><strong>pixel_size</strong> – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
+<li><p><strong>n_cores</strong> (<em>int</em>) – number of cores for parallel downloading and transformation into TIF files. n_core is limited
+to <span class="math notranslate nohighlight">\(n\_cores \leq n - 1\)</span>, where n ist the total number of cores found on the computer. n_cores can
+be intentionally be high in order to use <span class="math notranslate nohighlight">\(n - 1\)</span> cores.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.mosaic">
+<code class="sig-name descname">mosaic</code><span class="sig-paren">(</span><em class="sig-param">tif_filename</em>, <em class="sig-param">pixel_size</em>, <em class="sig-param">extent='region'</em>, <em class="sig-param">n_cores=1</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.mosaic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mosaic TIF files intersecting with the <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tif_filename</strong> (<em>str</em>) – output file name (.tif)</p></li>
+<li><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
+100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
+<li><p><strong>extent</strong> (<em>str</em>) – <cite>clip</cite> to clip <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>; <cite>region</cite> for a raster covering the envelope of
+<a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>; <cite>rasters</cite> for a raster extended to full tiles. Default <cite>region</cite>. extent=None corresponds
+to extent=`rasters`</p></li>
+<li><p><strong>n_cores</strong> (<em>int</em>) – number of cores for parallel downloading and transformation into TIF files. n_core is limited
+to <span class="math notranslate nohighlight">\(n\_cores \leq n - 1\)</span>, where n ist the total number of cores found on the computer. n_cores can
+be intentionally be high in order to use <span class="math notranslate nohighlight">\(n - 1\)</span> cores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p>See <a class="reference external" href="https://gdal.org/python/osgeo.gdal-module.html#WarpOptions">https://gdal.org/python/osgeo.gdal-module.html#WarpOptions</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dgm1.dgm1_nrw.DGM1HTMLParser">
+<em class="property">class </em><code class="sig-prename descclassname">dgm1.dgm1_nrw.</code><code class="sig-name descname">DGM1HTMLParser</code><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1HTMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">html.parser.HTMLParser</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1HTMLParser.handle_starttag">
+<code class="sig-name descname">handle_starttag</code><span class="sig-paren">(</span><em class="sig-param">tag</em>, <em class="sig-param">attrs</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1HTMLParser.handle_starttag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1HTMLParser.get_filenames">
+<em class="property">static </em><code class="sig-name descname">get_filenames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1HTMLParser.get_filenames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dgm1">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dgm1" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="dgm1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jackson Roehrig.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
