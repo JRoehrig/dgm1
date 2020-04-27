@@ -5,6 +5,10 @@
 
 License: **MIT**
 
+## Documentation
+
+http://warsa.de/dgm1/
+
 ## Installation
 
 dgm1 requires numpy and gdal.
@@ -197,7 +201,7 @@ Example:
     dgm1.mosaic('~/example/dgm1_area_02m_region.tif', pixel_size=2, extent='region')
     dgm1.mosaic('~/example/dgm1_area_02m_rasters.tif', pixel_size=2, extent='rasters')
 
-<img src="/doc/tutorial/images/mosaic_clip.png" alt="mosaic_clip" title="Mosaic" width="300"/> <img src="/doc/tutorial/images/mosaic_region.png" alt="mosaic_region" title="Mosaic region" width="300"/>
+<img src="/doc/tutorial/images/mosaic_clip.png" alt="mosaic_clip" title="Mosaic" width="200"/> <img src="/doc/tutorial/images/mosaic_region.png" alt="mosaic_region" title="Mosaic region" width="200"/> <img src="/doc/tutorial/images/mosaic_rasters.png" alt="mosaic_rasters" title="Mosaic rasters" width="200"/>
 
 Be aware that your computer may not support the creation of very large files due to RAM size limitations. If the region
 is large, the resolution (`pixel_size`) must increase to cope the RAM availability.
