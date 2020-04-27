@@ -49,8 +49,8 @@ ________
 * create VRT files (GDAL Virtual Format)
 * mosaic and clip
 
-At a glance
-___________
+Quickstart
+__________
 
 .. code-block:: python
 
