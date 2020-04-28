@@ -9,6 +9,7 @@ from abc import ABC
 import numpy as np
 import multiprocessing
 import urllib.request
+from functools import partial
 from timeit import default_timer
 from osgeo import ogr, gdal, osr
 from html.parser import HTMLParser
@@ -85,7 +86,7 @@ class DGM1NRW(object):
         :type pixel_size: int
         :return: (list) full path file names.
         """
-        return list(glob.glob('{}/dgm1_*_2_nw*.tif'.format(self.tif_dir(pixel_size))))
+        return list(glob.glob('{}/dgm1_*_2_nw_{:02d}m.tif'.format(self.tif_dir(pixel_size), pixel_size)))
 
     @staticmethod
     def srs():
@@ -221,7 +222,7 @@ class DGM1NRW(object):
     def _download(n, dgm1_01m_tif, args):
         i, file_name_server = args[0], args[1]
         t0 = default_timer()
-        file_name_tif = os.path.join(dgm1_01m_tif, file_name_server.replace('.xyz.gz', '.tif'))
+        file_name_tif = os.path.join(dgm1_01m_tif, file_name_server.replace('.xyz.gz', '_01m.tif'))
         url = 'https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_xyz/dgm1_xyz/'
         with urllib.request.urlopen(os.path.join(url, file_name_server)) as f:
             arr = np.array([float(i) for v in gzip.decompress(f.read()).split(b'\n') for i in v.split()])
@@ -253,7 +254,6 @@ class DGM1NRW(object):
             to :math:`n\_cores \leq n - 1`, where n ist the total number of cores found on the computer. n_cores can
             be intentionally be high in order to use :math:`n - 1` cores.
         """
-        from functools import partial
         t0 = default_timer()
 
         def _files_to_download():
@@ -263,8 +263,9 @@ class DGM1NRW(object):
                     raise ValueError('No tile found in the region {}'.format(self.shp_region))
             else:
                 file_names_server = DGM1HTMLParser.get_filenames()
-            file_names_local = list(glob.glob('{}/dgm1_*_2_nw.tif'.format(self.tif_dir(1))))
-            file_names_local = set([os.path.basename(f).replace('.tif', '.xyz.gz') for f in file_names_local])
+            file_names_local = self.tif_filenames(1)
+            file_names_local = set(['{}.xyz.gz'.format('_'.join(os.path.basename(f).split('_')[:-1]))
+                                    for f in file_names_local])
             return sorted(list(set(file_names_server).difference(file_names_local)))
 
         files_to_download = _files_to_download()
@@ -300,8 +301,8 @@ class DGM1NRW(object):
 
         tif_filenames = {os.path.splitext(f)[0]: (
             os.path.join(tif_1m_dir,  f),
-            os.path.join(tif_xm_dir,  f.replace('.tif', '_{:02d}m.tif'.format(pixel_size))))
-            for f in os.listdir(tif_1m_dir) if f.endswith('_nw.tif') and f.startswith('dgm1_')}
+            os.path.join(tif_xm_dir,  os.path.basename(f).replace('_01m.tif', '_{:02d}m.tif'.format(pixel_size))))
+            for f in self.tif_filenames(1)}
 
         srs_wkt = self.srs().ExportToWkt()
         n = len(tif_filenames)
@@ -379,7 +380,7 @@ class DGM1NRW(object):
             raise ValueError('{} not found'.format(self.shp_region) if self.shp_region else 'Region not defined')
         output_dir = os.path.dirname(vrt_filename)
         os.makedirs(output_dir, exist_ok=True)
-        tif_filenames = ['{}.tif'.format(f[:-7]) for f in self.gz_filenames_intersecting_region()]
+        tif_filenames = ['{}_01m.tif'.format(f[:-7]) for f in self.gz_filenames_intersecting_region()]
         if not tif_filenames:
             raise ValueError('No TIF file in {} intersects the region {}'.format(self.tif_dir(1), self.shp_region))
         if not all([os.path.isfile(os.path.join(self.tif_dir(1), f)) for f in tif_filenames]):
@@ -388,10 +389,10 @@ class DGM1NRW(object):
             self.resample(pixel_size)
         tif_dir = self.tif_dir(pixel_size)
         if pixel_size > 1:
-            filenames = [f.split('.')[0] for f in tif_filenames]
-            n = len(filenames[0])
+            filenames = ['_'.join(f.split('_')[:-1]) for f in tif_filenames]
             filenames = set(filenames)
-            tif_filenames = [os.path.join(tif_dir, f) for f in os.listdir(tif_dir) if f[:n] in filenames]
+            tif_filenames = [f for f in self.tif_filenames(pixel_size)
+                             if '_'.join(os.path.basename(f).split('_')[:-1]) in filenames]
         else:
             tif_filenames = [os.path.join(tif_dir, f) for f in tif_filenames]
         tif_dir = os.path.join(os.path.dirname(vrt_filename),

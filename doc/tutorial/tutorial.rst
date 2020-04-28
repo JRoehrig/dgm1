@@ -16,14 +16,14 @@ Using pip
 Using conda
 ^^^^^^^^^^^
 
-evapotranspiration is not available in conda, but we recommend to install numpy and gdal with conda before installing
-evapotranspiration with pip:
+dgm1 is not available in conda, but we recommend to install numpy and gdal with conda before installing
+dgm1 with pip:
 
 ::
 
     conda install numpy
     conda install gdal
-    pip install evapotranspiration
+    pip install dgm1
 
 Introduction
 ____________
@@ -52,41 +52,79 @@ ________
 Quickstart
 __________
 
+Downloaded data and project data can be save in different directories. In the
+example below:
+
+* `~/dgm1`: product directory
+* `~/example/`: project directory
+
+``~`` symbolizes home directory, e.g., `C:/users/myname/dgm1` and `C:/users/myname/example`.
+
+Data is downloaded and processed in the following structure:
+
+* `~/dgm1/dgm1_nrw_01m_tif/`: downloaded data
+* `~/dgm1/dgm1_nrw_02m_tif/`: resampled data
+* `~/dgm1/dgm1_nrw_05m_tif/`: resampled data
+* `~/dgm1/dgm1_nrw_10m_tif/`: resampled data
+
+
+.. note::
+
+    * `~/dgm1` and its subdirectories are created automatically.
+    * while `~/dgm1` is user defined, its subdirectories are not.
+
+In the code below only rasters intersecting the project area `~/example/area.shp` are downloaded.
+
+
 .. code-block:: python
 
-    from dgm.dgm1 import DGM1NRW
+    from dgm.dgm1_nrw import DGM1NRW
 
     # create an instance of the class DGM1NRW
-    dgm1 = DGM1NRW('~/dgm1', '~/example/area.shp')
 
-    # create a shapefile with polygons (2x2 km²) representing dem-tiles
+    # all ca. 9000 rasters will be downloaded.
+    # dgm1 = DGM1NRW(dgm1_dir='~/dgm1')
+
+    # only intersecting rasters will be downloaded.
+    dgm1 = DGM1NRW( dgm1_dir='~/dgm1', shp_region='~/example/area.shp')
+
+    # create a shapefile with polygons (2x2 km²) representing dem-tiles and save in
+    # ~/dgm/gis/dgm1_2_nw.shp
     dgm1.create_shapefile()
 
-    # download all XYZ files intersecting with the region and save them as TIF files
+    # download all XYZ files intersecting with the region ('~/example/area.shp') and
+    # save them as TIF files
     dgm1.download()
 
-    # resample the original 1 meter raster to 2, 5, and 10 meters
-    dgm1.resample(2)
-    dgm1.resample(5)
-    dgm1.resample(10)
+    # resample the original 1 meter raster to 2, 5, and 10 meters pixel_size
+    dgm1.resample(pixel_size=2)
+    dgm1.resample(pixel_size=5)
+    dgm1.resample(pixel_size=10)
 
-    # compose the TIF files into a GDAL Virtual Format for different resolutions
-    dgm1.create_vrt('~/example/dgm1_area_01m.vrt', pixel_size=1)
-    dgm1.create_vrt('~/example/dgm1_area_02m.vrt', pixel_size=2)
-    dgm1.create_vrt('~/example/dgm1_area_05m.vrt', pixel_size=5)
-    dgm1.create_vrt('~/example/dgm1_area_10m.vrt', pixel_size=10)
+In the following block VRT files and mosaic are created for the area `~/example/area.shp`
+
+.. code-block:: python
+
+    # create a GDAL Virtual Format for different resolutions. Each VRT file consists of the file
+    # `.vrt` and a corresponding directory. For example: file `~/example/dgm1_area_01m.vrt` and
+    # directory `~/example/dgm1_area_01m`.
+    dgm1.create_vrt('~/example/dgm1/dgm1_area_01m.vrt', pixel_size=1)
+    dgm1.create_vrt('~/example/dgm1/dgm1_area_02m.vrt', pixel_size=2)
+    dgm1.create_vrt('~/example/dgm1/dgm1_area_05m.vrt', pixel_size=5)
+    dgm1.create_vrt('~/example/dgm1/dgm1_area_10m.vrt', pixel_size=10)
 
     # mosaic TIF files intersecting the region
-    dgm1.mosaic('~/example/dgm1_area_01m.tif', pixel_size=1)
-    dgm1.mosaic('~/example/dgm1_area_02m.tif', pixel_size=2)
-    dgm1.mosaic('~/example/dgm1_area_05m.tif', pixel_size=5)
-    dgm1.mosaic('~/example/dgm1_area_10m.tif', pixel_size=10)
-
-.. image:: images/area.png
-    :width: 30 %
+    dgm1.mosaic('~/example/dgm1/dgm1_area_01m.tif', pixel_size=1)
+    dgm1.mosaic('~/example/dgm1/dgm1_area_02m.tif', pixel_size=2)
+    dgm1.mosaic('~/example/dgm1/dgm1_area_05m.tif', pixel_size=5)
+    dgm1.mosaic('~/example/dgm1/dgm1_area_10m.tif', pixel_size=10)
 
 .. image:: images/dgm1.png
-    :width: 32 %
+    :width: 40 %
+
+.. image:: images/area.png
+    :width: 40 %
+
 
 
 Instance
@@ -94,7 +132,7 @@ ________
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW(dgm1_dir='D:/dgm1', region='~/example/area.shp')
 
@@ -142,7 +180,7 @@ Download raster intersecting a region
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW('~/dgm1', '~/example/area.shp')
    dgm1.download()  # n_cores = 1
@@ -155,7 +193,7 @@ Download all
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW('~/dgm1')
    dgm1.download(n_cores=40)
@@ -175,7 +213,7 @@ The shapefile has an attribute ``Filename`` with the raster file name (see Figur
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW(dgm1_dir='~/dgm1', region='~/example/area.shp')
    dgm1.create_shapefile()
@@ -188,7 +226,7 @@ Each downloaded TIF file can be resample to a divisor of 2000 (2, 4, 5, 8, 10, 1
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW('~/dgm1')
    dgm1.resample(pixel_size=2)   # rasters with 1000x1000 pixels
@@ -200,7 +238,7 @@ downloading:
 
 .. code-block::
 
-   from dgm.dgm1 import DGM1NRW
+   from dgm.dgm1_nrw import DGM1NRW
 
    dgm1 = DGM1NRW('~/dgm1')
    dgm1.compress_options` = ['COMPRESS=LZMA']
@@ -211,15 +249,15 @@ ________
 
 The GDAL Virtual format creates a kind of mosaic file composed of tiles saved individually and listed in an XML
 file. Together with the (.vrt) there is a folder with the same name (without the suffix .vrt) containing the
-corresponding TIF files. It is very useful to create large rasters, which can not be created or processed otherwise due
+corresponding TIF files. It is very useful to create large rasters, which cannot be created or processed otherwise due
 to computer limitations.
 
 .. code-block:: python
 
-    from dgm.dgm1 import DGM1NRW
+    from dgm.dgm1_nrw import DGM1NRW
 
     dgm1 = DGM1NRW('~/dgm1', '~/example/area.shp')
-    dgm1.create_vrt('~/example/dgm1_area_01m.vrt', pixel_size=1)
+    dgm1.create_vrt('~/example/dgm1/dgm1_area_01m.vrt', pixel_size=1)
 
 .. image:: images/dgm1_vrt.png
     :width: 30 %
@@ -236,12 +274,12 @@ output raster extent:
 
 .. code-block:: python
 
-    from dgm.dgm1 import DGM1NRW
+    from dgm.dgm1_nrw import DGM1NRW
 
     dgm1 = DGM1NRW('~/dgm1', '~/example/area.shp')
-    dgm1.mosaic('~/example/dgm1_area_02m_clip.tif', pixel_size=2, extent='clip')
-    dgm1.mosaic('~/example/dgm1_area_02m_region.tif', pixel_size=2, extent='region')
-    dgm1.mosaic('~/example/dgm1_area_02m_rasters.tif', pixel_size=2, extent='rasters')
+    dgm1.mosaic('~/example/dgm1/dgm1_area_02m_clip.tif', pixel_size=2, extent='clip')
+    dgm1.mosaic('~/example/dgm1/dgm1_area_02m_region.tif', pixel_size=2, extent='region')
+    dgm1.mosaic('~/example/dgm1/dgm1_area_02m_rasters.tif', pixel_size=2, extent='rasters')
 
 .. image:: images/mosaic_clip.png
     :width: 30 %
@@ -257,4 +295,4 @@ is large, the resolution (`pixel_size`) must increase to cope the RAM availabili
 
 .. warning::
 
-    Due to memory limitations your computer may `freeze` if you mosaic a very large file at a low resolution!
+    Due to memory limitations, your computer may `freeze` if you mosaic a very large file at a low resolution!
