@@ -286,38 +286,55 @@ downloaded rasters with 1 meter resolution.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region">
-<code class="sig-name descname">gz_filenames_intersecting_region</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
-intersect the region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined or it is outside the
-domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
+<dt id="dgm1.dgm1_nrw.DGM1NRW.region_envelope">
+<code class="sig-name descname">region_envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.region_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return [x_min, y_min, x_max, y_max] for <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(list) list of files with the suffix <cite>xyz.gz</cite></p>
+<dd class="field-odd"><p>(list) envelope of <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dgm1.dgm1_nrw.DGM1NRW.tif_filenames_intersecting">
+<code class="sig-name descname">tif_filenames_intersecting</code><span class="sig-paren">(</span><em class="sig-param">envelope=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.tif_filenames_intersecting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of file names <a href="#id1"><span class="problematic" id="id2">*</span></a>.xyz.gz transformed into <a href="#id3"><span class="problematic" id="id4">*</span></a>.tif found on the server, which intersect the
+region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined or it is outside the
+domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>envelope</strong> – if True use envelopes of regions, otherwise use regions to get intersections. Default False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(list) list of files with the suffix <cite>tif</cite>.</p>
 </dd>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/study_area/region.shp&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">gz_filenames_intersecting_region</span><span class="p">()</span>
-<span class="go">[&#39;dgm1_32350_5672_2_nw.xyz.gz&#39;, &#39;dgm1_32350_5674_2_nw.xyz.gz&#39;, ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">tif_filenames_intersecting</span><span class="p">()</span>
+<span class="go">[&#39;dgm1_32350_5672_2_nw.tif&#39;, &#39;dgm1_32350_5674_2_nw.tif&#39;, ...</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
-<dt id="dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region_envelope">
-<code class="sig-name descname">gz_filenames_intersecting_region_envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting_region_envelope" title="Permalink to this definition">¶</a></dt>
+<dt id="dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting">
+<code class="sig-name descname">gz_filenames_intersecting</code><span class="sig-paren">(</span><em class="sig-param">envelope=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.gz_filenames_intersecting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
-intersect the envelopen of the region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined
-or the envelope is outside the domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
+intersect the region <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>. Return an empty list if the region is not defined or it is outside the
+domain <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles" title="dgm1.dgm1_nrw.DGM1NRW.shp_filename_tiles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_filename_tiles</span></code></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(list) list of files with the suffix <cite>xyz.gz</cite></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>envelope</strong> – if True use envelopes of regions, otherwise use regions to get intersections. Default False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(list) list of files with the suffix <cite>xyz.gz</cite>.</p>
 </dd>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span> <span class="o">=</span> <span class="n">DGM1NRW</span><span class="p">(</span><span class="s1">&#39;~/dgm1&#39;</span><span class="p">,</span> <span class="s1">&#39;~/study_area/region.shp&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">gz_filenames_intersecting_region</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgm1</span><span class="o">.</span><span class="n">gz_filenames_intersecting</span><span class="p">()</span>
 <span class="go">[&#39;dgm1_32350_5672_2_nw.xyz.gz&#39;, &#39;dgm1_32350_5674_2_nw.xyz.gz&#39;, ...</span>
 </pre></div>
 </div>
@@ -362,17 +379,6 @@ be intentionally be high in order to use <span class="math notranslate nohighlig
 </dd></dl>
 
 <dl class="method">
-<dt id="dgm1.dgm1_nrw.DGM1NRW.region_envelope">
-<code class="sig-name descname">region_envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.region_envelope" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return [x_min, y_min, x_max, y_max] for <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(list) envelope of <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="dgm1.dgm1_nrw.DGM1NRW.create_vrt">
 <code class="sig-name descname">create_vrt</code><span class="sig-paren">(</span><em class="sig-param">vrt_filename</em>, <em class="sig-param">pixel_size=1</em>, <em class="sig-param">n_cores=1</em><span class="sig-paren">)</span><a class="headerlink" href="#dgm1.dgm1_nrw.DGM1NRW.create_vrt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a raster named <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.vrt_filename" title="dgm1.dgm1_nrw.DGM1NRW.vrt_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">vrt_filename</span></code></a> in vrt-format. A folder without the suffix <cite>.vrt</cite> will be created
@@ -386,8 +392,8 @@ together with the and populated with rasters of the given <code class="xref py p
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vrt_filename</strong> (<em>str</em>) – full path vrt file name (.vrt)</p></li>
-<li><p><strong>pixel_size</strong> – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
-100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
+<li><p><strong>pixel_size</strong> – pixel size in meters. It must be a divisor of 2000 (1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50,
+80, 100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
 <li><p><strong>n_cores</strong> (<em>int</em>) – number of cores for parallel downloading and transformation into TIF files. n_core is limited
 to <span class="math notranslate nohighlight">\(n\_cores \leq n - 1\)</span>, where n ist the total number of cores found on the computer. n_cores can
 be intentionally be high in order to use <span class="math notranslate nohighlight">\(n - 1\)</span> cores.</p></li>
@@ -404,8 +410,8 @@ be intentionally be high in order to use <span class="math notranslate nohighlig
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tif_filename</strong> (<em>str</em>) – output file name (.tif)</p></li>
-<li><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
-100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
+<li><p><strong>pixel_size</strong> (<em>int</em>) – pixel size in meters. It must be a divisor of 2000 (1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50,
+80, 100, 125, 200, 250, 400, 500, 1000, 2000)</p></li>
 <li><p><strong>extent</strong> (<em>str</em>) – <cite>clip</cite> to clip <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>; <cite>region</cite> for a raster covering the envelope of
 <a class="reference internal" href="#dgm1.dgm1_nrw.DGM1NRW.shp_region" title="dgm1.dgm1_nrw.DGM1NRW.shp_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shp_region</span></code></a>; <cite>rasters</cite> for a raster extended to full tiles. Default <cite>region</cite>. extent=None corresponds
 to extent=`rasters`</p></li>

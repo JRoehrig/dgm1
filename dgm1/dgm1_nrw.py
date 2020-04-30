@@ -1,5 +1,6 @@
 # -- coding: ISO-8859-1 --
 import os
+import sys
 import time
 import glob
 import gzip
@@ -104,19 +105,73 @@ class DGM1NRW(object):
         srs.SetCompoundCS("ETRS89 / UTM zone 32N + DHHN2016 height", sr_25832, sr_7837)
         return srs
 
-    def gz_filenames_intersecting_region(self):
-        """Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
-        intersect the region :attr:`shp_region`. Return an empty list if the region is not defined or it is outside the
+    def region_envelope(self):
+        """Return [x_min, y_min, x_max, y_max] for :attr:`shp_region`
+
+        :return: (list) envelope of :attr:`shp_region`
+        """
+        driver = ogr.GetDriverByName('ESRI Shapefile')
+        ds_region = driver.Open(self.shp_region)
+        lr_region = ds_region.GetLayer(0)
+        srs_region = lr_region.GetSpatialRef()
+        srs_dgm1 = self.srs()
+        transform = osr.CoordinateTransformation(srs_region, srs_dgm1)
+
+        x_min = y_min = sys.float_info.max
+        x_max = y_max = sys.float_info.min
+        for feat_region in lr_region:
+            geom = feat_region.GetGeometryRef()
+            geom.Transform(transform)
+            x_min0, x_max0, y_min0, y_max0 = geom.GetEnvelope()
+            x_min = min(x_min, x_min0)
+            x_max = max(x_max, x_max0)
+            y_min = min(y_min, y_min0)
+            y_max = max(y_max, y_max0)
+        return x_min, y_min, x_max, y_max
+
+    def tif_filenames_intersecting(self, envelope=False):
+        """Return a list of file names *.xyz.gz transformed into *.tif found on the server, which intersect the
+        region :attr:`shp_region`. Return an empty list if the region is not defined or it is outside the
         domain :attr:`shp_filename_tiles`.
 
-        :return: (list) list of files with the suffix `xyz.gz`
+        :param envelope: if True use envelopes of regions, otherwise use regions to get intersections. Default False.
+        :return: (list) list of files with the suffix `tif`.
 
         Example::
 
            >>> dgm1 = DGM1NRW('~/dgm1', '~/study_area/region.shp')
-           >>> dgm1.gz_filenames_intersecting_region()
+           >>> dgm1.tif_filenames_intersecting()
+           ['dgm1_32350_5672_2_nw.tif', 'dgm1_32350_5674_2_nw.tif', ...
+        """
+        tif_filenames = ['{}_01m.tif'.format(f[:-7]) for f in self.gz_filenames_intersecting(envelope=envelope)]
+        return tif_filenames
+
+    def gz_filenames_intersecting(self, envelope=False):
+        """Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
+        intersect the region :attr:`shp_region`. Return an empty list if the region is not defined or it is outside the
+        domain :attr:`shp_filename_tiles`.
+
+        :param envelope: if True use envelopes of regions, otherwise use regions to get intersections. Default False.
+        :return: (list) list of files with the suffix `xyz.gz`.
+
+        Example::
+
+           >>> dgm1 = DGM1NRW('~/dgm1', '~/study_area/region.shp')
+           >>> dgm1.gz_filenames_intersecting()
            ['dgm1_32350_5672_2_nw.xyz.gz', 'dgm1_32350_5674_2_nw.xyz.gz', ...
         """
+        def _envelope(geom):
+            x_min, x_max, y_min, y_max = geom.GetEnvelope()
+            ring = ogr.Geometry(ogr.wkbLinearRing)
+            ring.AddPoint(x_min, y_min)
+            ring.AddPoint(x_min, y_max)
+            ring.AddPoint(x_max, y_max)
+            ring.AddPoint(x_max, y_min)
+            ring.AddPoint(x_min, y_min)
+            g_env = ogr.Geometry(ogr.wkbPolygon)
+            g_env.AddGeometry(ring)
+            return g_env.ExportToWkt()
+
         gz_filenames = []
         if not self.shp_region:
             return gz_filenames
@@ -138,47 +193,11 @@ class DGM1NRW(object):
         for feat_region in lr_region:
             polygon = feat_region.GetGeometryRef()
             polygon.Transform(transform)
+            if envelope:
+                polygon = ogr.CreateGeometryFromWkt(_envelope(polygon))
             lr_tiles.SetSpatialFilter(polygon)
             for feat_tiles in lr_tiles:
                 gz_filenames.append(feat_tiles.GetField('Filename'))
-        return gz_filenames
-
-    def gz_filenames_intersecting_region_envelope(self):
-        """Return a list of gzipped file names (dgm1_XXXXX_YYYY_2_nw.xyz.gz) found on the server, which
-        intersect the envelopen of the region :attr:`shp_region`. Return an empty list if the region is not defined
-        or the envelope is outside the domain :attr:`shp_filename_tiles`.
-
-        :return: (list) list of files with the suffix `xyz.gz`
-
-        Example::
-
-           >>> dgm1 = DGM1NRW('~/dgm1', '~/study_area/region.shp')
-           >>> dgm1.gz_filenames_intersecting_region()
-           ['dgm1_32350_5672_2_nw.xyz.gz', 'dgm1_32350_5674_2_nw.xyz.gz', ...
-        """
-        gz_filenames = []
-        if not self.shp_region:
-            return gz_filenames
-        if not os.path.isfile(self.shp_filename_tiles):
-            self.create_shapefile()
-
-        x_min, y_min, x_max, y_max = self.region_envelope()
-        ring = ogr.Geometry(ogr.wkbLinearRing)
-        ring.AddPoint(x_min, y_min)
-        ring.AddPoint(x_min, y_max)
-        ring.AddPoint(x_max, y_max)
-        ring.AddPoint(x_max, y_min)
-        ring.AddPoint(x_min, y_min)
-        polygon = ogr.Geometry(ogr.wkbPolygon)
-        polygon.AddGeometry(ring)
-
-        driver = ogr.GetDriverByName('ESRI Shapefile')
-        ds_tiles = driver.Open(self.shp_filename_tiles)
-        lr_tiles = ds_tiles.GetLayer(0)
-        lr_tiles.SetSpatialFilter(polygon)
-        for feat_tiles in lr_tiles:
-            gz_filenames.append(feat_tiles.GetField('Filename'))
-        ds_tiles = None
         return gz_filenames
 
     def create_shapefile(self):
@@ -258,7 +277,7 @@ class DGM1NRW(object):
 
         def _files_to_download():
             if self.shp_region:
-                file_names_server = self.gz_filenames_intersecting_region_envelope()
+                file_names_server = self.gz_filenames_intersecting(envelope=True)
                 if not file_names_server:
                     raise ValueError('No tile found in the region {}'.format(self.shp_region))
             else:
@@ -293,16 +312,19 @@ class DGM1NRW(object):
         :param force: if True, resample also existing files, otherwise skip them. Default force=False
         :type force: bool
         """
-        if pixel_size <= 1:
-            raise ValueError('Pixel size {} must be greater than 1 meter.'.format(pixel_size))
+        valid_sizes = [2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80, 100, 125, 200, 250, 400, 500, 1000, 2000]
+        if pixel_size not in valid_sizes:
+            raise ValueError('Resample with pixel size {} is not valid. Valid sizes are: {}.'.format(
+                pixel_size, ', '.join([str(s) for s in valid_sizes])))
         t0 = default_timer()
-        tif_1m_dir = self.tif_dir(1)
-        tif_xm_dir = self.tif_dir(pixel_size)
 
-        tif_filenames = {os.path.splitext(f)[0]: (
-            os.path.join(tif_1m_dir,  f),
-            os.path.join(tif_xm_dir,  os.path.basename(f).replace('_01m.tif', '_{:02d}m.tif'.format(pixel_size))))
-            for f in self.tif_filenames(1)}
+        tif_xm_dir = self.tif_dir(pixel_size)
+        tif_filenames = {}
+        for f0 in self.tif_filenames(1):
+            f1 = os.path.basename(f0)
+            code = os.path.splitext(f0)[0]
+            f1 = os.path.join(tif_xm_dir,  f1.replace('_01m.tif', '_{:02d}m.tif'.format(pixel_size)))
+            tif_filenames[code] = [f0, f1]
 
         srs_wkt = self.srs().ExportToWkt()
         n = len(tif_filenames)
@@ -333,27 +355,6 @@ class DGM1NRW(object):
                 print('{}/{} {} resampled in {:0.2f} seconds.'.format(i, n, os.path.basename(tif_xm_filename), time.time() - t00))
         print('Resample finished in {:0.2f} seconds'.format(default_timer() - t0))
 
-    def region_envelope(self):
-        """Return [x_min, y_min, x_max, y_max] for :attr:`shp_region`
-
-        :return: (list) envelope of :attr:`shp_region`
-        """
-        driver = ogr.GetDriverByName('ESRI Shapefile')
-        ds_region = driver.Open(self.shp_region)
-        lr_region = ds_region.GetLayer(0)
-        srs_region = lr_region.GetSpatialRef()
-        srs_dgm1 = self.srs()
-        transform = osr.CoordinateTransformation(srs_region, srs_dgm1)
-
-        env = list(lr_region.GetExtent())
-        env[1], env[2] = env[2], env[1]
-        for i, j in [[0, 1], [2, 3]]:
-            p = ogr.Geometry(ogr.wkbPoint)
-            p.AddPoint(env[i], env[j])
-            p.Transform(transform)
-            env[i], env[j] = p.GetX(), p.GetY()
-        return env
-
     def create_vrt(self, vrt_filename, pixel_size=1, n_cores=1):
         """Create a raster named :attr:`vrt_filename` in vrt-format. A folder without the suffix `.vrt` will be created
         together with the and populated with rasters of the given :attr:`pixel_size` intersecting with the region.
@@ -365,14 +366,21 @@ class DGM1NRW(object):
 
         :param vrt_filename: full path vrt file name (.vrt)
         :type vrt_filename: str
-        :param pixel_size: pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
-            100, 125, 200, 250, 400, 500, 1000, 2000)
+        :param pixel_size: pixel size in meters. It must be a divisor of 2000 (1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50,
+            80, 100, 125, 200, 250, 400, 500, 1000, 2000)
         :type pixel_size:
         :param n_cores: number of cores for parallel downloading and transformation into TIF files. n_core is limited
             to :math:`n\_cores \leq n - 1`, where n ist the total number of cores found on the computer. n_cores can
             be intentionally be high in order to use :math:`n - 1` cores.
         :type n_cores: int
         """
+        valid_sizes = [1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80, 100, 125, 200, 250, 400, 500, 1000, 2000]
+        if pixel_size not in valid_sizes:
+            raise ValueError('create_vrt with pixel size {} is not valid. Valid sizes are: {}.'.format(
+                pixel_size, ', '.join([str(s) for s in valid_sizes])))
+
+        if os.path.isdir(vrt_filename):
+            raise ValueError('VRT file name may no be ')
         t0 = default_timer()
         vrt_filename = os.path.expanduser(vrt_filename.strip())
         print('Creating {}'.format(vrt_filename), end=' ')
@@ -380,13 +388,15 @@ class DGM1NRW(object):
             raise ValueError('{} not found'.format(self.shp_region) if self.shp_region else 'Region not defined')
         output_dir = os.path.dirname(vrt_filename)
         os.makedirs(output_dir, exist_ok=True)
-        tif_filenames = ['{}_01m.tif'.format(f[:-7]) for f in self.gz_filenames_intersecting_region()]
+
+        tif_filenames = self.tif_filenames_intersecting()
         if not tif_filenames:
             raise ValueError('No TIF file in {} intersects the region {}'.format(self.tif_dir(1), self.shp_region))
         if not all([os.path.isfile(os.path.join(self.tif_dir(1), f)) for f in tif_filenames]):
             print()
             self.download(n_cores=n_cores)
-            self.resample(pixel_size)
+            if pixel_size != 1:
+                self.resample(pixel_size)
         tif_dir = self.tif_dir(pixel_size)
         if pixel_size > 1:
             filenames = ['_'.join(f.split('_')[:-1]) for f in tif_filenames]
@@ -405,8 +415,9 @@ class DGM1NRW(object):
             if not os.path.isfile(f_out):
                 shutil.copy(f_in, tif_dir)
 
+        env = self.region_envelope()
         gdal.BuildVRT(vrt_filename, tif_filenames_vrt, options=gdal.BuildVRTOptions(
-            outputBounds=self.region_envelope(), resampleAlg='nearest', addAlpha=True))
+            outputBounds=env, resampleAlg='nearest', addAlpha=True))
         print('finished in {:0.2f} seconds'.format(default_timer() - t0))
 
     def mosaic(self, tif_filename, pixel_size, extent='region', n_cores=1, **kwargs):
@@ -414,8 +425,8 @@ class DGM1NRW(object):
 
         :param tif_filename: output file name (.tif)
         :type tif_filename: str
-        :param pixel_size: pixel size in meters. It must be a divisor of 2000 (2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80,
-            100, 125, 200, 250, 400, 500, 1000, 2000)
+        :param pixel_size: pixel size in meters. It must be a divisor of 2000 (1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50,
+            80, 100, 125, 200, 250, 400, 500, 1000, 2000)
         :type pixel_size: int
         :param extent: `clip` to clip :attr:`shp_region`; `region` for a raster covering the envelope of
             :attr:`shp_region`; `rasters` for a raster extended to full tiles. Default `region`. extent=None corresponds
@@ -432,6 +443,11 @@ class DGM1NRW(object):
         """
         t0 = default_timer()
 
+        valid_sizes = [1, 2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80, 100, 125, 200, 250, 400, 500, 1000, 2000]
+        if pixel_size not in valid_sizes:
+            raise ValueError('create_vrt with pixel size {} is not valid. Valid sizes are: {}.'.format(
+                pixel_size, ', '.join([str(s) for s in valid_sizes])))
+
         if extent not in ['clip', 'region', 'rasters']:
             raise ValueError('extent = {} invalid. The parameter extent must be one of {}'.format(
                 extent, ', '.join(['clip', 'region', 'rasters'])))
@@ -443,17 +459,18 @@ class DGM1NRW(object):
         output_dir = os.path.dirname(tif_filename)
         os.makedirs(output_dir, exist_ok=True)
 
-        tif_filenames = ['{}.tif'.format(f[:-7]) for f in self.gz_filenames_intersecting_region_envelope()]
+        tif_filenames = self.tif_filenames_intersecting(envelope=True)
         if not tif_filenames:
             raise ValueError('No TIF file in {} intersects the region {}'.format(self.tif_dir(1), self.shp_region))
         if not all([os.path.isfile(os.path.join(self.tif_dir(1), f)) for f in tif_filenames]):
             print()
             self.download(n_cores=n_cores)
-            self.resample(pixel_size)
+            if pixel_size != 1:
+                self.resample(pixel_size)
 
         tif_dir = self.tif_dir(pixel_size)
         if pixel_size > 1:
-            filenames = [f.split('.')[0] for f in tif_filenames]
+            filenames = [f.replace('_01m.tif', '') for f in tif_filenames]
             n = len(filenames[0])
             filenames = set(filenames)
             tif_filenames = [os.path.join(tif_dir, f) for f in os.listdir(tif_dir) if f[:n] in filenames]
