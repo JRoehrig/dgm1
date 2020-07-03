@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 NAME = 'dgm1'
 
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 
 DESCRIPTION = 'DEM from NRW (Germany)'
 
